@@ -10,6 +10,5 @@ def clear_votes():
     from api.models import Post
 
     for post in Post.objects.all():
-        print(post)
         post.amount_of_upvotes = 0
         post.save()
