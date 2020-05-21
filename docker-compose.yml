@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  db:
+    restart: always
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  web:
+    restart: always
+    build: .
+    command: bash -c "cd /app && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+      - celery
+
+  celery:
+    build: .
+    command: bash -c "celery -A schedules worker -B -l debug -s /tmp/celerybeat-schedule"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+
+  redis:
+    restart: always
+    image: redis:latest
+    expose:
+      - "6379"
+    depends_on:
+      - db
