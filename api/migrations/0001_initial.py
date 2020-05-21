@@ -8,29 +8,35 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Post',
+            name="Post",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=120)),
-                ('link', models.URLField()),
-                ('creation_date', models.DateField(auto_now_add=True)),
-                ('amount_of_upvotes', models.PositiveIntegerField(default=0)),
-                ('author_name', models.CharField(max_length=60)),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
+                ("title", models.CharField(max_length=120)),
+                ("link", models.URLField()),
+                ("creation_date", models.DateField(auto_now_add=True)),
+                ("amount_of_upvotes", models.PositiveIntegerField(default=0)),
+                ("author_name", models.CharField(max_length=60)),
             ],
         ),
         migrations.CreateModel(
-            name='Comment',
+            name="Comment",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('author_name', models.CharField(max_length=60)),
-                ('content', models.CharField(max_length=120)),
-                ('creation_date', models.DateField(auto_now_add=True)),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='api.Post')),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
+                ("author_name", models.CharField(max_length=60)),
+                ("content", models.CharField(max_length=120)),
+                ("creation_date", models.DateField(auto_now_add=True)),
+                (
+                    "post",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="comments",
+                        to="api.Post",
+                    ),
+                ),
             ],
         ),
     ]
