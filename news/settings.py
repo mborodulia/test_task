@@ -79,15 +79,14 @@ WSGI_APPLICATION = "news.wsgi.application"
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": "db.sqlite3",}
-    # "default": {
-    #     "ENGINE": "django.db.backends.postgresql",
-    #     "NAME": "postgres",
-    #     "USER": "postgres",
-    #     "PASSWORD": "postgres",
-    #     "HOST": os.getenv("DATABASE_URL", "db"),
-    #     "PORT": 5432,
-    # }
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "USER": "postgres",
+        "PASSWORD": "postgres",
+        "HOST": os.getenv("DATABASE_URL", "db"),
+        "PORT": 5432,
+    }
 }
 
 
